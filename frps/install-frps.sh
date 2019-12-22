@@ -174,31 +174,31 @@ fun_get_version(){
         [ -x ${ver_file} ] && chmod +x ${ver_file}
         . ${ver_file}
     fi
-    if [ -z ${FRPS_VER} ] || [ -z ${FRPS_INIT} ] || [ -z ${github_download_url} ]; then
+    if [ -z ${FRPS_VER} ] || [ -z ${FRPS_INIT} ] || [ -z ${aliyun_download_url} ] || [ -z ${github_download_url} ]; then
         echo -e "${COLOR_RED}Error: ${COLOR_END}Get Program version failed!"
         exit 1
     fi
 }
 fun_getServer(){
-    def_server_url="github"
+    def_server_url="aliyun"
     echo ""
     echo -e "Please select ${program_name} download url:"
-    echo -e "[1].github (default)"
-    # echo -e "[2].github"#aliyun
+    echo -e "[1].aliyun (default)"
+    echo -e "[2].github"
     read -p "Enter your choice (1, 2 or exit. default [${def_server_url}]): " set_server_url
     [ -z "${set_server_url}" ] && set_server_url="${def_server_url}"
     case "${set_server_url}" in
         1|[Aa][Ll][Ii][Yy][Uu][Nn])
-            program_download_url=${github_download_url}
-            ;;
-       # 2|[Gg][Ii][Tt][Hh][Uu][Bb])
             program_download_url=${aliyun_download_url}
+            ;;
+        2|[Gg][Ii][Tt][Hh][Uu][Bb])
+            program_download_url=${github_download_url}
             ;;
         [eE][xX][iI][tT])
             exit 1
             ;;
         *)
-            program_download_url=${github_download_url}
+            program_download_url=${aliyun_download_url}
             ;;
     esac
     echo "---------------------------------------"
